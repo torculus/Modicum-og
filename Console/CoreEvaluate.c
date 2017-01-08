@@ -10,7 +10,7 @@
 
 void myAlert(char *funct, double args[], int n);
 
-/* Check out  for more formulas and ideas for implementation */
+/* Check out http://functions.wolfram.com for more formulas and ideas for implementation */
 
 double myNullaryEval(char *funct) {
     if (funct[0] == 'B') {

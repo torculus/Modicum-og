@@ -7,7 +7,6 @@
     #include <tgmath.h>
     #include <string.h>
     #include <stdbool.h>
-    /*#include <Python.h>*/
     #include "ModParser.tab.h"
     #include "CoreEvaluate.h"
     #include "Graphics.h"
@@ -40,7 +39,7 @@
 
     typedef struct node {
         double contents;
-	struct node *next;
+		struct node *next;
     } node;
 
     double *ptr;
@@ -110,29 +109,29 @@ line: END               { YYABORT; }
 ;
 
 expr:
-    double                          { $$ = $1; _prev = $$; }
-    | boolean                       { $$ = $1; _prev = $$; }
-    | WORD LBRACE RBRACE            { $$ = myNullaryEval($1); _prev = $$; }
-    | WORD LBRACE sequence RBRACE   { $$ = myEvaluate($1, argsList); _prev = $$; }
-    | WORD LBRACE list RBRACE       { $$ = myListToNum($1, argsList); _prev = $$; }
-    | WORD LBRACE text COMMA list RBRACE    {$$ = mySpecialEval($1, $3, argsList); _prev = $$; }
-    | WSPACE expr                   { $$ = $2; _prev = $$; } /* deletes all whitespace before */
-    | expr WSPACE                   { $$ = $1; _prev = $$; } /* deletes all whitespace after */
-    | LEFT expr RIGHT               { $$ = $2; _prev = $$;}
-    | expr PLUS expr                { $$ = $1 + $3; _prev = $$; }
-    | expr MINUS expr               { $$ = $1 - $3; _prev = $$;}
-    | MINUS expr %prec NEG          { $$ = -$2; _prev = $$;}
-    | expr TIMES expr               { $$ = $1 * $3; _prev = $$;}
-    | expr WSPACE expr              { $$ = $1 * $3; _prev = $$; }
-    | expr DIVIDE expr              { $$ = $1 / $3; _prev = $$;}
-    | expr POWER expr               { $$ = pow($1, $3); _prev = $$;}
-    | expr EXCLAM                   { $$ = tgamma($1 + 1); _prev = $$; }
-    | expr AND expr                 { $$ = $1 && $3; _prev = $$; }
-    | expr OR expr                  { $$ = $1 || $3; _prev = $$; }
-    | GRAPHICS_F text COMMA text RBRACE        { myGraphics($2, $4); }
-    | EXCLAM expr                   { $$ = !($2); _prev = $$; }
-    | WORD EQUALS expr              { $$ = varValues[m] = $3; varNames[m] = $1; m++; }
-    | symbol                        { $$ = $1; _prev = $$; }
+    double                          		{ $$ = $1; _prev = $$; }
+    | boolean                       		{ $$ = $1; _prev = $$; }
+    | WORD LBRACE RBRACE            		{ $$ = myNullaryEval($1); _prev = $$; }
+    | WORD LBRACE sequence RBRACE   		{ $$ = myEvaluate($1, argsList); _prev = $$; }
+    | WORD LBRACE list RBRACE       		{ $$ = myListToNum($1, argsList); _prev = $$; }
+    | WORD LBRACE text COMMA list RBRACE    { $$ = mySpecialEval($1, $3, argsList); _prev = $$; }
+    | WSPACE expr                   		{ $$ = $2; _prev = $$; } /* deletes all whitespace before */
+    | expr WSPACE                   		{ $$ = $1; _prev = $$; } /* deletes all whitespace after */
+    | LEFT expr RIGHT               		{ $$ = $2; _prev = $$;}
+    | expr PLUS expr                		{ $$ = $1 + $3; _prev = $$; }
+    | expr MINUS expr               		{ $$ = $1 - $3; _prev = $$;}
+    | MINUS expr %prec NEG          		{ $$ = -$2; _prev = $$;}
+    | expr TIMES expr               		{ $$ = $1 * $3; _prev = $$;}
+    | expr WSPACE expr              		{ $$ = $1 * $3; _prev = $$; }
+    | expr DIVIDE expr              		{ $$ = $1 / $3; _prev = $$;}
+    | expr POWER expr               		{ $$ = pow($1, $3); _prev = $$;}
+    | expr EXCLAM                   		{ $$ = tgamma($1 + 1); _prev = $$; }
+    | expr AND expr                 		{ $$ = $1 && $3; _prev = $$; }
+    | expr OR expr                  		{ $$ = $1 || $3; _prev = $$; }
+    | GRAPHICS_F text COMMA text RBRACE     { myGraphics($2, $4); }
+    | EXCLAM expr                   		{ $$ = !($2); _prev = $$; }
+    | WORD EQUALS expr              		{ $$ = varValues[m] = $3; varNames[m] = $1; m++; }
+    | symbol                        		{ $$ = $1; _prev = $$; }
 ;
 
 symbol:
